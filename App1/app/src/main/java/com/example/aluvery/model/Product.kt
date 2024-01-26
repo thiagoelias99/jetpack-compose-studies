@@ -10,7 +10,9 @@ class Product (
     var title: String,
     var price: BigDecimal,
     var description: String = "",
-    @DrawableRes val image: Int = R.drawable.ic_launcher_background
+    var type: ProductTypesEnum,
+    @DrawableRes val image: Int = R.drawable.ic_launcher_background,
+    var inPromo: Boolean = false
 ){
     companion object {
         fun getMock(): Product {
@@ -18,8 +20,14 @@ class Product (
                 id = 1,
                 title = LoremIpsum(words = 5).values.first(),
                 price = BigDecimal(99.99),
-                description = LoremIpsum(words = 15).values.first()
+                description = LoremIpsum(words = 15).values.first(),
+                type = ProductTypesEnum.FOOD,
+                inPromo = true
             )
         }
     }
+}
+
+enum class ProductTypesEnum {
+    FOOD, DRINK, SWEET
 }

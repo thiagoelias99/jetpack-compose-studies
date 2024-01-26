@@ -17,23 +17,28 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.aluvery.R
+import com.example.aluvery.data.SampleData
 import com.example.aluvery.model.Product
+import com.example.aluvery.model.ProductTypesEnum
 import java.math.BigDecimal
 
+class ProductSectionProps (
+    val sectionTitle: String,
+    val filter: ProductTypesEnum? = null,
+    val isPromo: Boolean = false
+)
 @Composable
-fun ProductSection() {
-    val products = listOf<Product>(
-        Product(id = 1, title = "Hamburguer", price = BigDecimal(19.99), description = "Um hambúrguer é um sanduíche composto por um ou mais hambúrgueres de carne, vegetais e condimentos entre pães.", image = R.drawable.burger),
-        Product(id = 2, title = "Pizza", price = BigDecimal(44.99), description = "Uma pizza é um prato de massa de formato redondo, coberto com molho de tomate e uma variedade de ingredientes, como queijo, vegetais, carnes e ervas, assada em forno.", image = R.drawable.pizza),
-        Product(id = 3, title = "Batata Frita", price = BigDecimal(8.99), image = R.drawable.fries)
-    )
+fun ProductSection(data: ProductSectionProps) {
+    var products = SampleData.productsList.filter { product -> product.type == data.filter }
+    if (data.filter == null) products = SampleData.productsList
+    if (data.isPromo){products = SampleData.productsList.filter { product -> product.inPromo }}
 
     Surface {
         Column {
             Text(
-                text = "Produtos",
+                text = data.sectionTitle,
                 fontSize = 20.sp,
-                fontWeight = FontWeight(400),
+                fontWeight = FontWeight(700),
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
             )
@@ -55,5 +60,10 @@ fun ProductSection() {
 )
 @Composable
 private fun ProductSectionPreview() {
-    ProductSection()
+    ProductSection(
+        ProductSectionProps(
+            sectionTitle = "Salgados",
+            filter = ProductTypesEnum.FOOD
+        )
+    )
 }

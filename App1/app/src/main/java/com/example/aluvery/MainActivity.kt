@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.aluvery.screens.MainScreen
 import com.example.aluvery.ui.components.DesafioCard
 import com.example.aluvery.ui.components.ProductItem
 import com.example.aluvery.ui.components.ProductSection
@@ -25,35 +26,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ScreenContent()
+            MainScreen()
         }
     }
 }
 
-@Composable
-private fun ScreenContent() {
-    Surface(
-        color = Color.Transparent,
-    ) {
-        Column(
-            Modifier
-                .padding(top = 16.dp)
-        ) {
-            ProductSection()
-            Box(
-                Modifier.padding(horizontal = 16.dp)
-            ) {
-                DesafioCard()
-            }
-        }
-    }
-}
-
-@Preview(
-    showBackground = true,
-    showSystemUi = true
-)
-@Composable
-fun GreetingPreview() {
-    ScreenContent()
-}

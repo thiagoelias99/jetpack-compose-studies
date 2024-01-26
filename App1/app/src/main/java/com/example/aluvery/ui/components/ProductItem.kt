@@ -82,6 +82,18 @@ fun ProductItem(product: Product) {
                         .background(color = Color.Red)
                         .align(Alignment.Center)
                 )
+                if (product.inPromo){
+                    Image(
+                        painter = painterResource(id = R.drawable.promo),
+                        contentDescription = "Product image",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .offset(x = (-8).dp, y = (8).dp)
+                            .clip(shape = CircleShape)
+                            .size(36.dp)
+                            .align(Alignment.TopEnd)
+                    )
+                }
             }
             Column(
                 Modifier
